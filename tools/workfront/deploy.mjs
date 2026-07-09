@@ -55,7 +55,10 @@ const get = (key) => data.find((r) => r.key === key)?.value;
 
 const clientId = get('clientId');
 const clientSecret = get('clientSecret');
-const domain = get('domain') || 'adoberm.my.workfront.com';
+// Sheet stores either a full "domain" (e.g. foo.my.workfront.com) or a short
+// "tenant" name (e.g. foo) that needs the standard suffix appended.
+const tenant = get('tenant');
+const domain = get('domain') || (tenant && !tenant.includes('.') ? `${tenant}.my.workfront.com` : tenant) || 'adoberm.my.workfront.com';
 
 if (!clientId || !clientSecret) {
   console.error('❌  Missing clientId or clientSecret in .da/adobe-workfront sheet');
