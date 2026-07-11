@@ -1,0 +1,10 @@
+{
+  "type": "da",
+  "sites": {
+    "southwest": {
+      "previewOrg": "ynaka-adobe",
+      "previewSite": "southwest",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

@@ -1,0 +1,139 @@
+/*
+ * Banner Promo — full-width promotional lifestyle banner.
+ * "Getaways by Southwest" beach banner: lifestyle background image with an
+ * eyebrow pill, large promo heading, fine-print disclaimer, and a yellow CTA.
+ * Values extracted from southwest.com #landingHomePageIndexProductOverview.
+ */
+
+/* Full-bleed: escape the section's 1200px max-width */
+.banner-promo-wrapper {
+  max-width: 100% !important;
+  padding: 0;
+}
+
+.banner-promo {
+  position: relative;
+  overflow: hidden;
+  color: var(--swa-navy);
+  background-color: #cfe7ef; /* fallback while image loads */
+  background-image: url('https://www.southwest.com/swa-resources/images/responsive/homepage/prod_ov/dXL-gtwys-HP4-ProductOverview-bs300-IMG.webp');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  border-radius: 6px;
+}
+
+/* Body cell → flex (text column + CTA), matching source .mainLayout */
+.banner-promo .banner-promo-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px 16px;
+}
+
+/* Text column: eyebrow + heading + fine-print stacked */
+.banner-promo .banner-promo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Eyebrow pill */
+.banner-promo .banner-promo-eyebrow {
+  margin: 0;
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background-color: var(--swa-bold-blue);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* Large promo heading (rendered from the second paragraph) */
+.banner-promo .banner-promo-heading {
+  margin: 5px 0 8px;
+  max-width: 720px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--swa-navy);
+}
+
+/* Fine-print disclaimer */
+.banner-promo .banner-promo-fineprint {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #000;
+}
+
+.banner-promo .banner-promo-fineprint a:any-link {
+  color: #000;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+/* CTA — yellow rectangle, navy text (override global blue pill button) */
+.banner-promo .button-container {
+  margin: 8px 0 0;
+}
+
+main .banner-promo a.button:any-link {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: 1px solid var(--swa-yellow);
+  border-radius: 2px;
+  background-color: var(--swa-yellow);
+  color: var(--swa-navy);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .banner-promo a.button:hover,
+main .banner-promo a.button:focus {
+  border-color: #e6ac00;
+  background-color: #e6ac00;
+  color: var(--swa-navy);
+  text-decoration: none;
+}
+
+/* ── Desktop: text column left, CTA vertically centred on the right ────── */
+@media (width >= 900px) {
+  .banner-promo .banner-promo-body {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 32px;
+    min-height: 285px;
+  }
+
+  .banner-promo .banner-promo-text {
+    flex: 1 1 auto;
+  }
+
+  .banner-promo .banner-promo-heading {
+    margin: 5px 0 16px;
+    max-width: 900px;
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .banner-promo .button-container {
+    margin: 0;
+    flex: 0 0 auto;
+    align-self: center;
+  }
+}

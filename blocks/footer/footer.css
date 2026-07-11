@@ -1,20 +1,189 @@
+/*
+ * Southwest footer — light-grey background with three stacked regions:
+ * callouts (Help Center / Subscribe / social icons / Mobile Apps), four link
+ * columns, and a legal/legend row. Brand tokens from styles.css / brand.css.
+ */
+
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: var(--swa-light-grey);
+  color: var(--swa-navy);
+  font-family: var(--body-font-family);
+  font-size: 14px;
 }
 
-footer .footer > div {
+footer .footer-wrapper > div {
   margin: auto;
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  padding: 0 20px;
 }
 
-footer .footer p {
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer p {
   margin: 0;
 }
 
+footer a:any-link {
+  color: var(--swa-bold-blue);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer img {
+  vertical-align: middle;
+}
+
+/* --- callouts region --- */
+footer .footer-callouts {
+  padding-top: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+footer .footer-callouts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+footer .footer-callouts-list > li > p:first-child {
+  font-size: 20px;
+  font-weight: 700;
+  color: #515151;
+  margin-bottom: 6px;
+}
+
+footer .footer-callouts a img {
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+}
+
+/* --- link columns --- */
+footer .footer-columns {
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+footer .footer-columns-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+footer .footer-column-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--swa-navy);
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+footer .footer-column-heading a {
+  color: var(--swa-navy);
+}
+
+footer .footer-column > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 12px;
+}
+
+footer .footer-column > ul a {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* accordion collapse on mobile */
+footer .footer-column[aria-expanded='false'] > ul {
+  display: none;
+}
+
+footer .footer-column-heading::after {
+  content: '';
+  display: inline-block;
+  float: right;
+  margin-top: 8px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid currentcolor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+footer .footer-column[aria-expanded='true'] .footer-column-heading::after {
+  transform: rotate(-135deg);
+}
+
+/* --- legal / legend region --- */
+footer .footer-legal {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  font-size: 12px;
+  color: var(--swa-navy);
+  line-height: 18px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+footer .footer-legal p {
+  margin-bottom: 12px;
+}
+
+footer .footer-legal img[alt='External'] {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+}
+
+footer .footer-legal p:last-child img {
+  height: 34px;
+  width: auto;
+  margin-right: 24px;
+}
+
+/* --- desktop --- */
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer-wrapper > div {
+    padding: 0 32px;
+  }
+
+  footer .footer-callouts-list {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  footer .footer-columns-list {
+    flex-direction: row;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  footer .footer-column {
+    flex: 1 1 0;
+  }
+
+  footer .footer-column-heading {
+    cursor: default;
+    padding: 0 0 12px;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 10px;
+  }
+
+  /* columns always open on desktop; hide the accordion caret */
+  footer .footer-column-heading::after {
+    display: none;
+  }
+
+  footer .footer-column[aria-expanded='false'] > ul {
+    display: flex;
   }
 }

@@ -1,324 +1,243 @@
-/* header and nav layout */
+/*
+ * Southwest header — solid white bar with a top utility row (Create account /
+ * Log in / Español / Search) and a main row (logo left; Flight|Hotel|Car|...,
+ * Special Offers, Rapid Rewards megamenu triggers right). Panels drop full-width
+ * below the header. Brand tokens inherited from styles.css / brand.css.
+ */
+
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background-color: #fff;
   width: 100%;
-  z-index: 2;
+  z-index: 20;
   position: fixed;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
 }
 
 header nav {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'hamburger brand tools' var(--nav-height)
-    'sections sections sections' 1fr / auto 1fr auto;
+    'brand utility' auto
+    'sections sections' auto / 1fr auto;
   align-items: center;
-  gap: 0 24px;
   margin: auto;
-  max-width: 1248px;
-  height: var(--nav-height);
-  padding: 0 24px;
+  max-width: 1264px;
+  padding: 8px 20px;
   font-family: var(--body-font-family);
+  color: var(--swa-navy);
 }
 
-header nav[aria-expanded='true'] {
-  grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
-  overflow-y: auto;
-  min-height: 100dvh;
+header nav a:any-link {
+  color: var(--swa-bold-blue);
+  text-decoration: none;
 }
 
-@media (width >= 900px) {
-  header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
-  }
-
-  header nav[aria-expanded='true'] {
-    min-height: 0;
-    overflow: visible;
-  }
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 header nav p {
   margin: 0;
-  
-  /* line-height: 1; BOILERPLATE DOESN'T HAVE a P tag in header, */
 }
 
-header nav a:any-link {
-  color: currentcolor;
-}
-
-/* hamburger */
+/* Southwest shows nav triggers inline at all breakpoints — no hamburger. */
 header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 22px;
-  display: flex;
-  align-items: center;
+  display: none;
 }
 
-header nav .nav-hamburger button {
-  height: 22px;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background-color: var(--background-color);
-  color: inherit;
-  overflow: initial;
-  text-overflow: initial;
-  white-space: initial;
-}
-
-header nav .nav-hamburger-icon,
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  box-sizing: border-box;
-  display: block;
-  position: relative;
-  width: 20px;
-}
-
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  content: '';
-  position: absolute;
-  background: currentcolor;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon,
-header nav[aria-expanded='false'] .nav-hamburger-icon::before,
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  height: 2px;
-  border-radius: 2px;
-  background: currentcolor;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon {
-  height: 22px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon::before,
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
-  transform: rotate(45deg);
-  transform-origin: 2px 1px;
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
-}
-
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
-  transform: rotate(-45deg);
-}
-
-@media (width >= 900px) {
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
-}
-
-/* brand */
+/* --- brand --- */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
-  font-weight: 700;
-  line-height: 1;
+  justify-self: start;
 }
+
+header .nav-brand p:first-child { display: none; } /* hide the "Southwest" text link; logo image is used */
 
 header nav .nav-brand img {
-  width: 128px;
+  width: 200px;
   height: auto;
-}
-
-/* sections */
-header nav .nav-sections {
-  grid-area: sections;
-  flex: 1 1 auto;
-  display: none;
-  visibility: hidden;
-}
-
-header nav[aria-expanded='true'] .nav-sections {
   display: block;
-  visibility: visible;
-  align-self: start;
 }
 
-header nav .nav-sections ul {
-  list-style: none;
-  padding-left: 0;
-  font-size: var(--body-font-size-s);
+/* --- utility bar --- */
+header .nav-utility {
+  grid-area: utility;
+  display: block;
 }
 
-header nav .nav-sections ul > li {
-  font-weight: 500;
+header .nav-utility ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
+  padding: 0;
+  font-size: 13px;
+  flex-wrap: wrap;
 }
 
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
+header .nav-utility ul li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
 }
 
-header nav .nav-sections ul > li > ul > li {
-  font-weight: 400;
+/* stylelint-disable-next-line no-descending-specificity */
+header .nav-utility img {
+  width: 18px;
+  height: 18px;
 }
 
+/* --- main megamenu nav --- */
+header .nav-sections {
+  grid-area: sections;
+}
+
+header .nav-megamenu {
+  display: flex;
+  flex-direction: column;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+header .nav-megamenu > li {
+  border-top: 1px solid #e6e6e6;
+}
+
+header .nav-trigger {
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--swa-bold-blue);
+  cursor: pointer;
+  padding: 14px 0;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+header .nav-trigger a { color: var(--swa-bold-blue); }
+
+/* dropdown panels */
+header .nav-panel {
+  padding: 0 0 12px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+header .nav-panel > li > p {
+  font-weight: 700;
+  color: var(--swa-navy);
+  padding: 10px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+header .nav-panel img {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+header .nav-panel ul { margin: 0; }
+
+header .nav-panel ul li a {
+  display: block;
+  padding: 6px 0 6px 30px;
+  font-size: 14px;
+  color: var(--swa-bold-blue);
+}
+
+/* collapse panels by default; expanded state shows them */
+header .nav-megamenu > li > .nav-panel { display: none; }
+header .nav-megamenu > li[aria-expanded='true'] > .nav-panel { display: block; }
+
+/* --- desktop --- */
 @media (width >= 900px) {
-  header nav .nav-sections {
-    display: block;
-    visibility: visible;
+  header nav {
+    display: grid;
+    grid-template:
+      'brand utility' auto
+      'brand sections' auto / auto 1fr;
+    column-gap: 32px;
+    padding: 0 32px;
+    height: var(--nav-height);
+  }
+
+  header nav .nav-hamburger { display: none; }
+
+  header .nav-brand {
+    align-self: center;
+    grid-row: 1 / span 2;
+  }
+
+  header .nav-utility { display: block; }
+
+  header .nav-utility ul { padding: 10px 0 4px; }
+
+  header .nav-sections { align-self: end; }
+
+  header .nav-megamenu {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 28px;
+  }
+
+  header .nav-megamenu > li {
+    border-top: none;
+    position: static;
+  }
+
+  header .nav-trigger {
+    padding: 0 0 14px;
+    position: relative;
     white-space: nowrap;
   }
 
-  header nav[aria-expanded='true'] .nav-sections {
-    align-self: unset;
-  }
-
-  header nav .nav-sections .nav-drop {
-    position: relative;
-    padding-right: 16px;
-    cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop::after {
+  header .nav-drop .nav-trigger::after {
     content: '';
     display: inline-block;
-    position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
+    margin-left: 6px;
     width: 6px;
     height: 6px;
     border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
+    border-width: 0 2px 2px 0;
+    transform: translateY(-2px) rotate(45deg);
   }
 
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
+  header .nav-drop[aria-expanded='true'] .nav-trigger::after {
+    transform: translateY(1px) rotate(-135deg);
   }
 
-  header nav .nav-sections ul {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    margin: 0;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    flex: 0 1 auto;
-    position: relative;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
-    display: none;
-    position: relative;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: block;
+  /* full-width dropdown panel below the header bar */
+  header .nav-megamenu > li[aria-expanded='true'] > .nav-panel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 8px 32px;
     position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
-    background-color: var(--light-color);
-    white-space: initial;
-    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 28px max(32px, calc((100vw - 1200px) / 2)) 40px;
+    background: #fff;
+    box-shadow: 0 8px 12px rgb(0 0 0 / 12%);
+    z-index: 30;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+  header .nav-panel > li > p {
+    font-size: 18px;
+    color: var(--swa-bold-blue);
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 10px;
+    margin-bottom: 6px;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: 8px 0;
-  }
-}
-
-/* tools */
-header nav .nav-tools {
-  grid-area: tools;
-}
-
-header nav .nav-tools .button {
-  margin: 0;
-  border: none;
-  padding: 0.5em;
-  background: none;
-  line-height: 0;
-}
-
-/* breadcrumbs */
-header .breadcrumbs {
-  display: none;
-  margin: auto;
-  max-width: 1248px;
-  height: var(--breadcrumbs-height);
-  padding: 0 24px;
-  font-size: var(--body-font-size-xs);
-  overflow: hidden;
-}
-
-header .breadcrumbs ol {
-  display: flex;
-  flex-flow: wrap;
-  list-style: none;
-  padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  gap: 1ch;
-}
-
-/* stylelint-disable-next-line no-descending-specificity */
-header .breadcrumbs ol li {
-  padding: 0;
-  color: var(--dark-color);
-}
-
-header .breadcrumbs ol li:not(:last-child)::after {
-  content: '/';
-  padding-left: 1ch;
-}
-
-/* stylelint-disable-next-line no-descending-specificity */
-header .breadcrumbs ol li[aria-current] {
-  color: var(--text-color);
-}
-
-@media (width >= 900px) {
-  header .breadcrumbs {
-    display: block;
-    max-width: 1264px;
-    padding: 0 32px;
+  header .nav-panel ul li a {
+    padding: 5px 0;
   }
 }

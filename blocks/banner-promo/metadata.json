@@ -1,0 +1,41 @@
+{
+  "variantName": "banner-promo",
+  "baseBlock": "banner",
+  "version": "1.0.0",
+  "created": "2026-07-11T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.southwest.com",
+    "originPage": "Southwest.com homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "colored",
+    "density": "spacious",
+    "purpose": "promo",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "full-width background image + eyebrow + heading + body + CTA",
+    "buttonCount": 1,
+    "imageCount": 1,
+    "hasDescription": true,
+    "hasCTA": true
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "wide promotional lifestyle banners with a full-bleed background image",
+      "campaign / getaway espots with heading + body + single CTA over a photo",
+      "mid-page marketing banners"
+    ],
+    "notSuitableFor": [
+      "compact ad-size banners (use base banner leader-board / medium-rectangle)",
+      "thin notification ribbons",
+      "repeating card grids (use cards variant)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-11T00:00:00.000Z"
+  }
+}

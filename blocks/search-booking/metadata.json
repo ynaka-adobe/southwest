@@ -1,0 +1,41 @@
+{
+  "variantName": "search-booking",
+  "baseBlock": "search",
+  "version": "1.0.0",
+  "created": "2026-07-11T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.southwest.com",
+    "originPage": "Southwest.com homepage",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "booking",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "product tabs + trip-type toggle + origin/destination/date fields + primary CTA",
+    "buttonCount": 1,
+    "imageCount": 0,
+    "hasDescription": false,
+    "hasCTA": true
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "flight/travel booking widgets over a hero background",
+      "reservation search cards with tabs and multiple input fields",
+      "homepage booking entry points"
+    ],
+    "notSuitableFor": [
+      "site content search (use the base search block)",
+      "single-field newsletter/email capture",
+      "non-interactive promotional banners"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-11T00:00:00.000Z"
+  }
+}

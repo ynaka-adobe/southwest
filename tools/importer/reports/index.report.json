@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://www.southwest.com",
+  "path": "index",
+  "timestamp": "2026-07-11T01:17:42.250Z",
+  "title": "Southwest Airlines | Airline Tickets and Low Fares",
+  "template": "homepage",
+  "blocks": [
+    "search-booking",
+    "hero-banner",
+    "hero-banner",
+    "banner-promo",
+    "cards-promo"
+  ]
+}

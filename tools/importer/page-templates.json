@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.southwest.com"
+      ],
+      "representativeUrl": "https://www.southwest.com",
+      "coverageGaps": [],
+      "description": "Southwest Airlines homepage with header, hero booking area, promotional content sections, and footer",
+      "blocks": [
+        {
+          "name": "search-booking",
+          "instances": [
+            "#bookingSection > div.containerWithPadding__25mnl > div.backgroundColor__2J30W.image__JooQe"
+          ]
+        },
+        {
+          "name": "hero-banner",
+          "instances": [
+            "#bookingSection > div.containerWithPadding__25mnl > div:nth-of-type(2)",
+            "#landingHomePageIndexImgOverlay > div.bannerWithCardContainer__120BY > div.rightAlignmentGridContainer__3N6YI.grid__1TvIC"
+          ]
+        },
+        {
+          "name": "banner-promo",
+          "instances": [
+            "#landingHomePageIndexProductOverview"
+          ]
+        },
+        {
+          "name": "cards-promo",
+          "instances": [
+            "#specialOffersTwo"
+          ]
+        },
+        {
+          "name": "section-special-offers",
+          "instances": [
+            "#pageContent > div.pageContent__3XVqO > section > div:nth-of-type(7)"
+          ],
+          "section": "light"
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero-booking",
+          "name": "Hero Booking",
+          "selector": "#bookingSection",
+          "style": null,
+          "blocks": [
+            "search-booking",
+            "hero-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "product-overview",
+          "name": "Product Overview",
+          "selector": "#landingHomePageIndexProductOverview",
+          "style": null,
+          "blocks": [
+            "banner-promo"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rapid-rewards-banner",
+          "name": "Rapid Rewards Banner",
+          "selector": "#landingHomePageIndexImgOverlay",
+          "style": null,
+          "blocks": [
+            "hero-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "special-offers",
+          "name": "Special Offers",
+          "selector": "#pageContent > div.pageContent__3XVqO > section > div:nth-of-type(7)",
+          "style": "light",
+          "blocks": [
+            "cards-promo"
+          ],
+          "defaultContent": [
+            "#pageContent > div.pageContent__3XVqO > section > div:nth-of-type(7) > section.section__31vwa > div.paddingTopDefault__236N9 > div.compactHeading__1Mm_m.layout__HiTxF.bottomMedium__2ik4n.center__Ofnw0.sides__38zJG"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+/*
+ * Search Booking — flight/travel booking widget.
+ * Styled to visually resemble the southwest.com booking card: flat white panel,
+ * blue tab strip, bold-blue labels over grey inputs, and a bold yellow Search
+ * action. Values extracted from source computed styles; brand tokens inherited
+ * from brand.css / styles.css.
+ */
+
+/* Full-width so the card can sit over the dark hero without the EDS
+   section max-width clamp fighting the layout. */
+.search-booking-wrapper {
+  max-width: 100%;
+}
+
+.search-booking {
+  max-width: 592px;
+  padding: 16px;
+  background-color: #fff;
+  color: var(--text-color); /* swa-navy */
+  font-family: var(--body-font-family);
+}
+
+/* ── Tab strip (Flights / Vacations / Hotels / Cars / Cruises) ───────── */
+.search-booking .search-booking-tabs {
+  display: flex;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.search-booking .search-booking-tab {
+  flex: 1;
+  height: 56px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--link-color); /* bold blue */
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.search-booking .search-booking-tab-active {
+  font-weight: 700;
+  border-bottom-color: var(--link-color);
+}
+
+/* ── Form layout ─────────────────────────────────────────────────────── */
+.search-booking .search-booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0 0;
+}
+
+/* Trip-type radios */
+.search-booking .search-booking-triptypes {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.search-booking .search-booking-triptype {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* Field grid — single column on mobile */
+.search-booking .search-booking-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.search-booking .search-booking-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.search-booking .search-booking-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-color); /* navy */
+}
+
+.search-booking .search-booking-input {
+  height: 48px;
+  padding: 4px 8px 3px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background-color: #fff;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
+.search-booking .search-booking-input:focus {
+  outline: none;
+  border-color: var(--link-color);
+  box-shadow: 0 0 0 2px rgb(48 76 178 / 20%);
+}
+
+/* ── Actions / Search button ─────────────────────────────────────────── */
+.search-booking .search-booking-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+/* Yellow pill matching the source "Search flights" button. High
+   specificity + :any-link to beat the global a.button decoration. */
+.search-booking .search-booking-submit,
+.search-booking a.search-booking-submit:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+  height: 48px;
+  padding: 0 24px;
+  border: 1px solid var(--swa-yellow);
+  border-radius: 2px;
+  background-color: var(--swa-yellow);
+  color: var(--text-color); /* navy text */
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.search-booking .search-booking-submit:hover,
+.search-booking a.search-booking-submit:hover {
+  background-color: #e6ab00;
+  border-color: #e6ab00;
+}
+
+/* ── Desktop: 2-column field grid like the source card ───────────────── */
+@media (width >= 900px) {
+  .search-booking .search-booking-fields {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
