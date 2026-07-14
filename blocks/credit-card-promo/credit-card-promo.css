@@ -1,0 +1,78 @@
+.credit-card-promo > div > div {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: var(--background-color);
+  box-shadow: 0 5px 5px 0 rgb(0 0 0 / 15%);
+}
+
+@media (width >= 600px) {
+  .credit-card-promo > div > div {
+    flex-direction: row;
+  }
+}
+
+.credit-card-promo-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 45%;
+  padding: 24px;
+  background: linear-gradient(135deg, #e8ecf1 0%, #cfd6de 100%);
+}
+
+.credit-card-promo-image img {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  object-fit: contain;
+}
+
+.credit-card-promo-body {
+  display: flex;
+  flex: 1 1 55%;
+  flex-direction: column;
+  gap: 8px;
+  padding: 32px;
+  background-color: #fff;
+}
+
+.credit-card-promo-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+.credit-card-promo-detail {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  color: var(--text-color);
+}
+
+.credit-card-promo-detail strong {
+  color: var(--swa-navy);
+  font-weight: 700;
+}
+
+.credit-card-promo-cta {
+  margin-top: 12px;
+}
+
+main .credit-card-promo-cta a.button:any-link {
+  border: 1px solid var(--swa-yellow);
+  border-radius: 2px;
+  background-color: var(--swa-yellow);
+  color: var(--swa-navy);
+  font-weight: 700;
+}
+
+main .credit-card-promo-cta a.button:any-link:hover,
+main .credit-card-promo-cta a.button:any-link:focus {
+  border-color: #e6ac00;
+  background-color: #e6ac00;
+}
