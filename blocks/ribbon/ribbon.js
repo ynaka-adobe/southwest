@@ -32,6 +32,8 @@ export default function decorate(block) {
   text.className = 'ribbon-text';
   if (textParagraph) text.append(...textParagraph.childNodes);
   if (link) {
+    // undo the global auto-button decoration; this is a plain hyperlink
+    link.classList.remove('button', 'primary', 'secondary');
     link.classList.add('ribbon-cta');
     text.append(' ', link);
   }
