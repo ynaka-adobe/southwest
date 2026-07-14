@@ -58,10 +58,6 @@ body.appear {
   display: block;
 }
 
-header {
-  height: var(--header-height);
-}
-
 header .header,
 footer .footer {
   visibility: hidden;
