@@ -50,6 +50,19 @@ async function replaceLoginLinkWithWidget(nav) {
   loginLink.replaceWith(widget);
 }
 
+// "Create account" is redundant now that the login widget's own popover
+// includes an "Enroll Now" link, so drop the nav link entirely.
+function removeCreateAccountLink(nav) {
+  const utility = nav.querySelector('.nav-utility');
+  if (!utility) return;
+  const createAccountLink = [...utility.querySelectorAll('a')]
+    .find((a) => a.textContent.trim().toLowerCase() === 'create account');
+  if (!createAccountLink) return;
+
+  const item = createAccountLink.closest('li') || createAccountLink;
+  item.remove();
+}
+
 function closeAllPanels(nav, exceptTrigger = null) {
   nav.querySelectorAll('.nav-megamenu > li[aria-expanded="true"]').forEach((li) => {
     if (li !== exceptTrigger) li.setAttribute('aria-expanded', 'false');
@@ -141,6 +154,8 @@ export default async function decorate(block) {
     const bc = a.closest('.button-container');
     if (bc) bc.classList.remove('button-container');
   });
+
+  removeCreateAccountLink(nav);
 
   // Progressive enhancement: swap in the login widget once its script
   // loads; don't block header rendering on it.
