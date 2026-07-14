@@ -1,4 +1,4 @@
-.credit-card-promo > div > div {
+.credit-card-promo > div {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -9,7 +9,7 @@
 }
 
 @media (width >= 600px) {
-  .credit-card-promo > div > div {
+  .credit-card-promo > div {
     flex-direction: row;
   }
 }
