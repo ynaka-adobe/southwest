@@ -1,0 +1,47 @@
+/* Full-bleed: break out of the section's max-width container */
+.ribbon-wrapper {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.ribbon-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px;
+  background: linear-gradient(to right, #fff 0%, var(--light-color) 25%, var(--light-color) 75%, #fff 100%);
+  text-align: center;
+}
+
+.ribbon-icon {
+  display: flex;
+  flex: none;
+}
+
+.ribbon-icon img {
+  display: block;
+  width: 32px;
+  height: auto;
+  border-radius: 2px;
+}
+
+.ribbon-text {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  color: var(--text-color);
+}
+
+.ribbon-text a.ribbon-cta:any-link {
+  margin-left: 4px;
+  color: var(--link-color);
+  font-weight: 600;
+}
+
+@media (width < 600px) {
+  .ribbon-content {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+}
