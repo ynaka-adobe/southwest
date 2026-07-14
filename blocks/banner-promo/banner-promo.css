@@ -5,15 +5,19 @@
  * Values extracted from southwest.com #landingHomePageIndexProductOverview.
  */
 
-/* Full-bleed: escape the section's 1200px max-width */
+/* Full-bleed wrapper (no extra padding/max-width fighting the block's own
+   1200px cap below), but the block itself is capped at 1200x285. */
 .banner-promo-wrapper {
-  max-width: 100% !important;
+  max-width: 100%;
   padding: 0;
 }
 
 .banner-promo {
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
   color: var(--swa-navy);
   background-color: #cfe7ef; /* fallback while image loads */
   background-image: url('https://www.southwest.com/swa-resources/images/responsive/homepage/prod_ov/dXL-gtwys-HP4-ProductOverview-bs300-IMG.webp');
@@ -111,13 +115,19 @@ main .banner-promo a.button:focus {
 
 /* ── Desktop: text column left, CTA vertically centred on the right ────── */
 @media (width >= 900px) {
+  .banner-promo {
+    height: 285px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
   .banner-promo .banner-promo-body {
+    height: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    padding: 16px 32px;
-    min-height: 285px;
+    padding: 0 32px;
   }
 
   .banner-promo .banner-promo-text {
