@@ -19,6 +19,56 @@
 }
 
 /* ===================================================================
+   Variant 3: Rapid Rewards card floated over a full-bleed photo.
+   decorate() hoists a <picture> (authored inside the block, or as its
+   immediately preceding sibling) onto .hero-banner itself and wraps
+   the rest of the content into .hero-banner-card — same background/
+   containing-block technique as blocks/hero.
+   =================================================================== */
+.hero-banner.hero-banner-has-image {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: 320px;
+}
+
+.hero-banner.hero-banner-has-image > picture {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+}
+
+.hero-banner.hero-banner-has-image > picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-banner.hero-banner-has-image > div {
+  width: 100%;
+}
+
+.hero-banner.hero-banner-has-image > div > div {
+  padding: 24px 0;
+}
+
+.hero-banner-card {
+  max-width: 480px;
+  margin-left: auto;
+  padding: 32px;
+  background-color: var(--background-color);
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 15%);
+}
+
+@media (width >= 900px) {
+  .hero-banner.hero-banner-has-image {
+    min-height: 420px;
+  }
+}
+
+/* ===================================================================
    Variant 2 (default): Rapid Rewards card — light background
    =================================================================== */
 .hero-banner h2 {
