@@ -1,3 +1,17 @@
+:root {
+  /* total rendered hero height (min-height + 2 * 40px vertical padding);
+     kept in sync with .hero below and used by the overlay rules further
+     down so the search-booking card is pulled up by exactly this much,
+     regardless of what else shares the section with hero. */
+  --hero-height: 500px;
+}
+
+@media (width >= 900px) {
+  :root {
+    --hero-height: 640px;
+  }
+}
+
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
@@ -8,7 +22,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  min-height: 420px;
+  min-height: calc(var(--hero-height) - 80px);
   padding: 40px 24px;
 }
 
@@ -130,32 +144,34 @@ main .hero-content a.button:any-link:focus {
 }
 
 /* ===================================================================
-   Overlay: when a search-booking block is authored in the same
-   section as hero (no section break between them), stack the two so
-   the booking card floats over the left side of the hero image.
+   Overlay: when a search-booking block immediately follows hero (as
+   its next sibling — no other block authored between them), pull it
+   up by hero's own height so it floats over the left side of the
+   hero image. This targets the sibling relationship directly rather
+   than the shared section, so it isn't affected by whatever else
+   (promos, ribbons, etc.) happens to share that section.
    =================================================================== */
-.hero-container.search-booking-container {
+.hero-wrapper + .search-booking-wrapper {
   position: relative;
-}
-
-.hero-container.search-booking-container .search-booking-wrapper {
-  position: absolute;
-  inset: 0;
+  z-index: 1;
+  margin-top: calc(-1 * var(--hero-height));
+  min-height: var(--hero-height);
   display: flex;
   align-items: center;
+  pointer-events: none;
 }
 
-.hero-container.search-booking-container .search-booking {
+.hero-wrapper + .search-booking-wrapper .search-booking {
   justify-content: flex-start;
+  pointer-events: auto;
 }
 
 @media (width < 900px) {
-  .hero-container.search-booking-container .search-booking-wrapper {
+  .hero-wrapper + .search-booking-wrapper {
     position: static;
+    margin-top: 0;
+    min-height: 0;
     padding: 24px;
-  }
-
-  .hero-container.search-booking-container .hero {
-    min-height: 320px;
+    pointer-events: auto;
   }
 }
