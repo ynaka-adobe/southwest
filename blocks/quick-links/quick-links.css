@@ -1,5 +1,7 @@
-/* Full-bleed: break out of the section's max-width container */
-.quick-links-wrapper {
+/* Full-bleed: break out of the section's max-width container.
+   Needs the two-class selector (not just .quick-links-wrapper) to
+   out-specificity the `main > .section > div` rule in styles.css. */
+.quick-links-container .quick-links-wrapper {
   max-width: 100%;
   padding: 0;
   margin: 0;
