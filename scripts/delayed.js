@@ -1,1 +1,3 @@
-// add delayed functionality here
+import initFeedback from './feedback.js';
+
+initFeedback();
