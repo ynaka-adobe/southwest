@@ -6,11 +6,6 @@
       (black heading, navy bullet list, yellow CTA)
    Values extracted from computed styles on southwest.com. */
 
-/* ---- full-width wrapper: cancel the section max-width so the card fills ---- */
-.hero-banner-container .hero-banner-wrapper {
-  max-width: 100%;
-}
-
 /* single row / single content cell */
 .hero-banner > div > div {
   max-width: 1200px;
@@ -19,11 +14,13 @@
 }
 
 /* ===================================================================
-   Variant 3: Rapid Rewards card floated over a full-bleed photo.
-   decorate() hoists a <picture> (authored inside the block, or as its
-   immediately preceding sibling) onto .hero-banner itself and wraps
-   the rest of the content into .hero-banner-card — same background/
-   containing-block technique as blocks/hero.
+   Variant 3: Rapid Rewards card floated over a photo. decorate() hoists
+   a <picture> (authored inside the block, or as its immediately
+   preceding sibling) onto .hero-banner itself and wraps the rest of
+   the content into .hero-banner-card — same background/containing-
+   block technique as blocks/hero. The block itself stays the standard
+   1200px width (like other blocks); the image is narrower than that,
+   left-aligned, so the card can float over its right edge.
    =================================================================== */
 .hero-banner.hero-banner-has-image {
   position: relative;
@@ -36,7 +33,11 @@
 .hero-banner.hero-banner-has-image > picture {
   position: absolute;
   z-index: -1;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1100px;
+  max-width: 100%;
 }
 
 .hero-banner.hero-banner-has-image > picture img {
