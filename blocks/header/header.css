@@ -104,6 +104,33 @@ header .nav-megamenu > li {
   border-top: 1px solid #e6e6e6;
 }
 
+/* icon-only items appended to the bottom row: notification bell + search */
+header .nav-megamenu > li.nav-icon-item {
+  border-top: none;
+  display: flex;
+  align-items: center;
+}
+
+header .nav-icon-item a,
+header .nav-icon-item .nav-bell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--swa-bold-blue);
+  cursor: pointer;
+}
+
+header .nav-icon-item img,
+header .nav-icon-item svg {
+  width: 20px;
+  height: 20px;
+}
+
 header .nav-trigger {
   font-weight: 700;
   font-size: 14px;

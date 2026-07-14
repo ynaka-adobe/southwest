@@ -63,6 +63,38 @@ function removeCreateAccountLink(nav) {
   item.remove();
 }
 
+const BELL_ICON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-1.5 2.5h15L18 16Z" stroke-linejoin="round"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>';
+
+// Move the "Search" link from the top utility bar down into the bottom
+// megamenu row (icon-only there), and add a notification bell next to it.
+function moveSearchAndAddBellToBottomNav(nav) {
+  const utility = nav.querySelector('.nav-utility');
+  const navMenu = nav.querySelector('.nav-megamenu');
+  if (!utility || !navMenu) return;
+
+  const searchLink = [...utility.querySelectorAll('a')]
+    .find((a) => a.textContent.trim().toLowerCase() === 'search');
+  const searchItem = searchLink?.closest('li');
+  if (!searchItem) return;
+
+  searchItem.classList.add('nav-icon-item');
+  searchLink.setAttribute('aria-label', 'Search');
+  searchLink.textContent = '';
+  const searchPicture = searchItem.querySelector('picture');
+  if (searchPicture) searchLink.append(searchPicture);
+
+  const bellItem = document.createElement('li');
+  bellItem.className = 'nav-icon-item';
+  const bellButton = document.createElement('button');
+  bellButton.type = 'button';
+  bellButton.className = 'nav-bell';
+  bellButton.setAttribute('aria-label', 'Notifications');
+  bellButton.innerHTML = BELL_ICON_SVG;
+  bellItem.append(bellButton);
+
+  navMenu.append(bellItem, searchItem);
+}
+
 function closeAllPanels(nav, exceptTrigger = null) {
   nav.querySelectorAll('.nav-megamenu > li[aria-expanded="true"]').forEach((li) => {
     if (li !== exceptTrigger) li.setAttribute('aria-expanded', 'false');
@@ -186,6 +218,8 @@ export default async function decorate(block) {
     });
     decorateMegamenu(nav, navMenu);
   }
+
+  moveSearchAndAddBellToBottomNav(nav);
 
   nav.setAttribute('aria-expanded', 'true');
 
