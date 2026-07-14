@@ -3,6 +3,38 @@ import { loadFragment } from '../fragment/fragment.js';
 
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+const LOGIN_WIDGET_SCRIPT_URL = 'https://southwest-apps.vercel.app/login-widget.js';
+const LOGIN_WIDGET_TAG = 'sw-login';
+
+let loginWidgetScriptPromise;
+function loadLoginWidgetScript() {
+  if (customElements.get(LOGIN_WIDGET_TAG)) return Promise.resolve();
+  if (!loginWidgetScriptPromise) {
+    loginWidgetScriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = LOGIN_WIDGET_SCRIPT_URL;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.append(script);
+    });
+  }
+  return loginWidgetScriptPromise;
+}
+
+// Swap the plain "Log in" nav link for the <sw-login> micro-frontend: a
+// styled trigger button that opens its own login popover on click, no
+// extra wiring needed since the widget owns that behavior itself.
+async function replaceLoginLinkWithWidget(nav) {
+  const utility = nav.querySelector('.nav-utility');
+  if (!utility) return;
+  const loginLink = [...utility.querySelectorAll('a')]
+    .find((a) => a.textContent.trim().toLowerCase() === 'log in');
+  if (!loginLink) return;
+
+  await loadLoginWidgetScript();
+  loginLink.replaceWith(document.createElement(LOGIN_WIDGET_TAG));
+}
+
 function closeAllPanels(nav, exceptTrigger = null) {
   nav.querySelectorAll('.nav-megamenu > li[aria-expanded="true"]').forEach((li) => {
     if (li !== exceptTrigger) li.setAttribute('aria-expanded', 'false');
@@ -94,6 +126,10 @@ export default async function decorate(block) {
     const bc = a.closest('.button-container');
     if (bc) bc.classList.remove('button-container');
   });
+
+  // Progressive enhancement: swap in the login widget once its script
+  // loads; don't block header rendering on it.
+  replaceLoginLinkWithWidget(nav);
 
   // Main megamenu nav (EDS wraps content in .default-content-wrapper)
   const navSections = nav.querySelector('.nav-sections');
