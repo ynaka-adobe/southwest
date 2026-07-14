@@ -1,0 +1,62 @@
+/* Full-bleed: break out of the section's max-width container */
+.quick-links-wrapper {
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-links-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 12px 24px;
+  list-style: none;
+  background-color: var(--swa-navy);
+}
+
+.quick-links-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 16px;
+}
+
+.quick-links-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  height: 14px;
+  transform: translateY(-50%);
+  background-color: rgb(255 255 255 / 40%);
+}
+
+.quick-links-icon {
+  display: flex;
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+
+.quick-links-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.quick-links-label,
+a.quick-links-label:any-link {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.quick-links-label:hover,
+a.quick-links-label:hover {
+  text-decoration: underline;
+}
