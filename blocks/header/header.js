@@ -63,7 +63,8 @@ function removeCreateAccountLink(nav) {
   item.remove();
 }
 
-const BELL_ICON_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-1.5 2.5h15L18 16Z" stroke-linejoin="round"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>';
+// Filled (not outline) so it reads as "colored in" with the theme blue.
+const BELL_ICON_SVG = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2Zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5S10.5 3.17 10.5 4v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2Z"/></svg>';
 
 // Move the "Search" link from the top utility bar down into the bottom
 // megamenu row (icon-only there), and add a notification bell next to it.

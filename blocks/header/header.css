@@ -109,6 +109,8 @@ header .nav-megamenu > li.nav-icon-item {
   border-top: none;
   display: flex;
   align-items: center;
+  height: 22px;
+  line-height: 0;
 }
 
 header .nav-icon-item a,
@@ -127,6 +129,7 @@ header .nav-icon-item .nav-bell {
 
 header .nav-icon-item img,
 header .nav-icon-item svg {
+  display: block;
   width: 20px;
   height: 20px;
 }
