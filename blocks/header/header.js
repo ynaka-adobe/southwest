@@ -32,7 +32,22 @@ async function replaceLoginLinkWithWidget(nav) {
   if (!loginLink) return;
 
   await loadLoginWidgetScript();
-  loginLink.replaceWith(document.createElement(LOGIN_WIDGET_TAG));
+  const widget = document.createElement(LOGIN_WIDGET_TAG);
+
+  // Widget bug workaround: its "close on outside click" listener is
+  // registered on `document` and compares event.target against a ref
+  // *inside* its own shadow root. Once retargeted across the shadow
+  // boundary, event.target is the <sw-login> host itself, which a
+  // shadow-internal ref can never "contain" — so every click inside the
+  // widget (typing, clicking submit, anything) is misread as "outside"
+  // and closes the popover before it can do anything. Stop pointerdown
+  // events from ever reaching that document listener when they
+  // originate inside this widget; genuine outside clicks are untouched
+  // since they never pass through this element. Real fix belongs in the
+  // widget itself (use event.composedPath() instead of event.target).
+  widget.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+  loginLink.replaceWith(widget);
 }
 
 function closeAllPanels(nav, exceptTrigger = null) {
