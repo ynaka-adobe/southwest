@@ -109,6 +109,19 @@ function decorateMegamenu(nav, navMenu) {
         }
       });
     }
+
+    // Desktop: also open on hover (mouseleave only fires once the pointer
+    // truly leaves this item, including its flyout panel, since the panel
+    // is a DOM descendant of item — so no separate hover-out timer needed).
+    item.addEventListener('mouseenter', () => {
+      if (!isDesktop.matches) return;
+      closeAllPanels(nav, item);
+      item.setAttribute('aria-expanded', 'true');
+    });
+    item.addEventListener('mouseleave', () => {
+      if (!isDesktop.matches) return;
+      item.setAttribute('aria-expanded', 'false');
+    });
   });
 
   // Close any open panel when clicking outside the nav (desktop).
