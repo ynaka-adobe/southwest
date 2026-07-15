@@ -190,7 +190,7 @@ header .nav-megamenu > li[aria-expanded='true'] > .nav-panel { display: block; }
       'brand sections' auto / auto 1fr;
     column-gap: 32px;
     padding: 0 32px;
-    height: var(--nav-height);
+    min-height: var(--nav-height);
   }
 
   header nav .nav-hamburger { display: none; }
@@ -216,6 +216,13 @@ header .nav-megamenu > li[aria-expanded='true'] > .nav-panel { display: block; }
   header .nav-megamenu > li {
     border-top: none;
     position: static;
+  }
+
+  /* .nav-trigger's own box is 0 top / 14px bottom padding, so its text
+     sits flush at the top of the row; align icon items the same way
+     instead of full-height centering, or they visually sit too low. */
+  header .nav-megamenu > li.nav-icon-item {
+    align-self: flex-start;
   }
 
   header .nav-trigger {
