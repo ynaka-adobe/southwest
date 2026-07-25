@@ -126,16 +126,22 @@ export async function applyTargetHeroMboxIfConfigured() {
   await new Promise((resolve) => {
     t.getOffer({
       mbox,
-      async success(offers) {
+      // NB: this must stay a plain (non-async) function — at.js's internal
+      // getOffer() validation rejects an async success callback ("success
+      // option is required"), silently dropping the whole call with
+      // neither success nor error ever firing. Do the async decoration
+      // work via .then() instead of awaiting inside the callback itself.
+      success(offers) {
         const match = resolveSelector();
         if (!match) {
           resolve();
           return;
         }
         t.applyOffer({ mbox, selector: match.selector, offer: offers });
-        await waitForMutation(match.el);
-        decorateAndLoadNestedBlocks(match.el);
-        resolve();
+        waitForMutation(match.el).then(() => {
+          decorateAndLoadNestedBlocks(match.el);
+          resolve();
+        });
       },
       error: resolve,
     });
