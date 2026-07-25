@@ -1,8 +1,48 @@
-import { getMetadata } from './aem.js';
+import { decorateBlock, getMetadata, loadBlock } from './aem.js';
 
 /** AEM Universal Editor iframe; skip Target so at.js does not fight UE/CSP. */
 export function isUePreviewHost(hostname = window.location.hostname) {
   return /\.(?:stage-ue|ue)\.da\.live$/.test(hostname);
+}
+
+/**
+ * Target offer HTML can contain raw EDS block markup (e.g. a "ribbon" div),
+ * but Target injects it directly into the DOM (via applyOffer or an
+ * outerHTML swap) well after the page's own decorateBlocks()/loadBlocks()
+ * pass already ran — so it never gets the "block" class, data-block-name,
+ * or its CSS/JS. Find and decorate any such block-shaped div under `root`
+ * so it renders and behaves the same as a normal, authored block.
+ * @param {Element} root
+ */
+function decorateAndLoadNestedBlocks(root) {
+  root.querySelectorAll('div[class]').forEach((el) => {
+    if (el.classList.length !== 1 || el.classList.contains('block')) return;
+    if (el.dataset.blockStatus) return;
+    decorateBlock(el);
+    loadBlock(el);
+  });
+}
+
+/**
+ * t.applyOffer() mutates the DOM asynchronously with no completion callback,
+ * so scanning for new content immediately after calling it is a race —
+ * wait for an actual mutation under `el` (or give up after `timeoutMs`).
+ * @param {Element} el
+ * @param {number} [timeoutMs]
+ */
+function waitForMutation(el, timeoutMs = 4000) {
+  return new Promise((resolve) => {
+    const observer = new MutationObserver(() => {
+      observer.disconnect();
+      clearTimeout(timer);
+      resolve();
+    });
+    observer.observe(el, { childList: true, subtree: true });
+    const timer = setTimeout(() => {
+      observer.disconnect();
+      resolve();
+    }, timeoutMs);
+  });
 }
 
 /**
@@ -45,7 +85,12 @@ export async function loadTarget() {
         const { cssSelector, content } = payload;
         if (!cssSelector || content == null) return;
         const el = document.querySelector(cssSelector);
-        if (el) el.outerHTML = content;
+        if (!el) return;
+        const { parentElement } = el;
+        el.outerHTML = content;
+        // el is now detached (outerHTML replaced it); the new content
+        // lives under its old parent, so scope decoration there.
+        if (parentElement) decorateAndLoadNestedBlocks(parentElement);
       });
     }
   } catch (e) {
@@ -81,13 +126,15 @@ export async function applyTargetHeroMboxIfConfigured() {
   await new Promise((resolve) => {
     t.getOffer({
       mbox,
-      success(offers) {
+      async success(offers) {
         const match = resolveSelector();
         if (!match) {
           resolve();
           return;
         }
         t.applyOffer({ mbox, selector: match.selector, offer: offers });
+        await waitForMutation(match.el);
+        decorateAndLoadNestedBlocks(match.el);
         resolve();
       },
       error: resolve,
