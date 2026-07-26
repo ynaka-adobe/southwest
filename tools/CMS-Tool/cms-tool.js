@@ -953,7 +953,7 @@ async function buildApp(activities, wfProjects, sdk) {
 
   const titleWrap = document.createElement('div');
   titleWrap.className = 'header-title-wrap';
-  titleWrap.innerHTML = `<h1 class="header-title">CMC Management Tool</h1><div class="header-title-underline"></div>`;
+  titleWrap.innerHTML = `<h1 class="header-title">Campaign Manager</h1><div class="header-title-underline"></div>`;
 
   const headerActions = document.createElement('div');
   headerActions.className = 'header-actions';
