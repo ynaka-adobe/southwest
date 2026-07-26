@@ -930,7 +930,7 @@ async function buildApp(activities, wfProjects, sdk) {
   const rail = document.createElement('div');
   rail.className = 'rail';
   rail.innerHTML = `
-    <div class="rail-logo" title="CMC Tool">CAT</div>
+    <div class="rail-logo" title="CMC Tool">SWA</div>
     <div class="rail-divider"></div>
     <div class="rail-icon active" title="Campaigns">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -34,14 +34,14 @@ body {
 .rail-logo {
   width: 36px;
   height: 36px;
-  background: #ffcb00;
+  background: #fff;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  font-size: 15px;
-  color: #1a1a1a;
+  font-size: 14px;
+  color: #304cb2;
   letter-spacing: -1px;
   flex-shrink: 0;
   cursor: pointer;
