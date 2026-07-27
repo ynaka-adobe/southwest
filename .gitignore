@@ -10,3 +10,8 @@ helix-importer-ui
 tools/target/config.json
 migration-work/navigation-validation/
 migration-work/footer-validation/
+
+edge-functions/.aio
+edge-functions/bin/
+edge-functions/pkg/
+edge-functions/node_modules/
