@@ -113,18 +113,25 @@ header .nav-megamenu > li {
 header .nav-megamenu > li.nav-icon-item {
   border-top: none;
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   height: 22px;
   line-height: 0;
 }
 
+/* 44x44 touch target (WCAG 2.5.5), offset by a matching negative margin
+   so the larger hit area doesn't change the row's visual layout/alignment
+   — the icon itself stays visually 20px, centered within it. */
 header .nav-icon-item a,
 header .nav-icon-item .nav-bell {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 44px;
+  max-width: none;
+  height: 44px;
+  margin: -11px;
   padding: 0;
   border: 0;
   background: none;
