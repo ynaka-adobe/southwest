@@ -1,0 +1,21 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://www.fastly.com/documentation/reference/compute/fastly-toml
+
+authors = []
+cloned_from = "https://github.com/fastly/compute-starter-kit-javascript-empty"
+description = "Southwest AEM Edge Functions — geo/personalization"
+language = "javascript"
+manifest_version = 3
+name = "southwest-edge-functions"
+service_id = ""
+
+[scripts]
+  build = "npm run build"
+  post_init = "npm install"
+
+[local_server]
+  [local_server.config_stores]
+    [local_server.config_stores.config_default]
+      format = "inline-toml"
+    [local_server.config_stores.config_default.contents]
+      LOG_LEVEL = "debug"
