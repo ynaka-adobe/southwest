@@ -2,6 +2,11 @@
  * Search Booking — mounts the <sw-flight-search> micro-frontend, which is
  * self-contained (shadow DOM, :host{all:initial}). This wrapper just centers
  * it and undoes the section max-width clamp so it isn't squeezed.
+ *
+ * Its min-height (to reserve space before the widget mounts, preventing
+ * CLS) lives in styles.css instead of here — this stylesheet loads
+ * asynchronously per-block, well after first paint, so a reservation here
+ * can't actually prevent the shift.
  */
 
 .search-booking-wrapper {

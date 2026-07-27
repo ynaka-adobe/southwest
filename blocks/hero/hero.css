@@ -1,16 +1,9 @@
-:root {
-  /* total rendered hero height (min-height + 2 * 40px vertical padding);
-     kept in sync with .hero below and used by the overlay rules further
-     down so the search-booking card is pulled up by exactly this much,
-     regardless of what else shares the section with hero. */
-  --hero-height: 500px;
-}
-
-@media (width >= 900px) {
-  :root {
-    --hero-height: 640px;
-  }
-}
+/* --hero-height and .hero's own min-height live in styles.css, not here:
+   header.css/hero.css load asynchronously per-block, well after first
+   paint, so a CLS-preventing min-height declared here can't actually
+   prevent the shift — it just relocates it to whenever this stylesheet
+   happens to finish loading. styles.css is render-blocking, so the
+   reservation is guaranteed to apply before first paint. */
 
 .hero-container .hero-wrapper {
   max-width: unset;
@@ -22,7 +15,6 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  min-height: calc(var(--hero-height) - 80px);
   padding: 40px 24px;
 }
 
@@ -138,7 +130,6 @@ main .hero-content a.button:any-link:focus {
 
 @media (width >= 900px) {
   .hero {
-    min-height: 560px;
     padding: 40px 32px;
   }
 }

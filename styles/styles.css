@@ -56,6 +56,22 @@ body.appear {
   display: block;
 }
 
+/* Reserve space for the header before its nav fragment loads (fetched
+   async, well after first paint) so it doesn't pop in and shift all page
+   content down — this must live here (render-blocking styles.css), not in
+   header.css, which loads asynchronously per-block and would be too late
+   to prevent the shift. Approximate, measured heights; stacked nav items
+   make mobile much taller than the two-row desktop layout. */
+header {
+  min-height: 291px;
+}
+
+@media (width >= 900px) {
+  header {
+    min-height: 95px;
+  }
+}
+
 header .header,
 footer .footer {
   visibility: hidden;
@@ -64,6 +80,28 @@ footer .footer {
 header .header[data-block-status="loaded"],
 footer .footer[data-block-status="loaded"] {
   visibility: visible;
+}
+
+/* Same reasoning as the header rule above: .hero and .search-booking's own
+   min-height reservations must be render-blocking to actually prevent CLS,
+   so they live here rather than in hero.css/search-booking.css. --hero-height
+   is also consumed by hero.css's hero+search-booking overlay rules. */
+:root {
+  --hero-height: 500px;
+}
+
+@media (width >= 900px) {
+  :root {
+    --hero-height: 640px;
+  }
+}
+
+.hero {
+  min-height: calc(var(--hero-height) - 80px);
+}
+
+.search-booking {
+  min-height: 533px;
 }
 
 @media (width >= 900px) {

@@ -5,6 +5,11 @@
  * below the header. Brand tokens inherited from styles.css / brand.css.
  */
 
+/* header's own min-height reservation (to prevent CLS while the nav
+   fragment loads) lives in styles.css, not here — header.css is loaded
+   asynchronously per-block, well after first paint, so a rule here
+   can't prevent the shift; it would just relocate it slightly later. */
+
 header .nav-wrapper {
   position: relative;
   background-color: #fff;
