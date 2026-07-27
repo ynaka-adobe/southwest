@@ -23,14 +23,17 @@
  * renders those literally as plain text.
  *
  * If the headline paragraph isn't already a heading, decorate() promotes
- * it to <h2> automatically so paragraph counting (see hero.css) and
- * styling stay correct either way.
+ * it automatically (to whatever level correctly follows the page's prior
+ * headings — see findNextHeading in scripts/aem.js) so paragraph counting
+ * (see hero.css) and styling stay correct either way.
  *
  * To overlay a search-booking block on top of the hero image, author the
  * Search Booking block immediately after this one, as its next sibling
  * (no other block in between) — see blocks/hero/hero.css for the
  * overlay rules.
  */
+
+import { findNextHeading } from '../../scripts/aem.js';
 
 export default function decorate(block) {
   const cell = block.querySelector(':scope > div > div');
@@ -54,12 +57,18 @@ export default function decorate(block) {
   });
   cell.append(content);
 
-  // promote the headline to a real heading if it was authored as plain text
-  const heading = content.querySelector(':scope > h1, :scope > h2, :scope > h3');
+  // promote the headline to a real heading if it was authored as plain text.
+  // Level is computed from what precedes this block on the page (rather
+  // than hardcoded) so it can't skip or duplicate a level.
+  let heading = content.querySelector(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
   const firstParagraph = content.querySelector(':scope > p');
   if (!heading && firstParagraph) {
-    const h2 = document.createElement('h2');
-    h2.append(...firstParagraph.childNodes);
-    firstParagraph.replaceWith(h2);
+    heading = document.createElement(findNextHeading(block));
+    heading.append(...firstParagraph.childNodes);
+    firstParagraph.replaceWith(heading);
   }
+  // h1 is reserved for the auto-block variant (styled by the separate
+  // `.hero h1` rule) — everything else gets the authored variant's
+  // .hero-title treatment.
+  if (heading && heading.tagName !== 'H1') heading.classList.add('hero-title');
 }

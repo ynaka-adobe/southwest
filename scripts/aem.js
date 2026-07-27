@@ -250,6 +250,31 @@ function getMetadata(name, doc = document) {
 }
 
 /**
+ * Determines the correct heading level (H1-H6) for content a block is about
+ * to insert, by walking backward through preceding siblings/ancestors for
+ * the last heading used on the page and returning one level deeper — so
+ * blocks never hardcode a heading level that could skip or duplicate one
+ * depending on where they're authored on the page.
+ * @param {Element} el The element the new heading will be inserted near
+ * @returns {string} Heading tag name, e.g. 'H2'
+ */
+function findNextHeading(el) {
+  let preceedingEl = el.parentElement.previousElementSibling || el.parentElement.parentElement;
+  let h = 'H2';
+  while (preceedingEl) {
+    const lastHeading = [...preceedingEl.querySelectorAll('h1, h2, h3, h4, h5, h6')].pop();
+    if (lastHeading) {
+      const level = parseInt(lastHeading.nodeName[1], 10);
+      h = level < 6 ? `H${level + 1}` : 'H6';
+      preceedingEl = false;
+    } else {
+      preceedingEl = preceedingEl.previousElementSibling || preceedingEl.parentElement;
+    }
+  }
+  return h;
+}
+
+/**
  * Returns a picture element with webp and fallbacks
  * @param {string} src The image URL
  * @param {string} [alt] The image alternative text
@@ -680,6 +705,7 @@ export {
   decorateSections,
   decorateTemplateAndTheme,
   fetchPlaceholders,
+  findNextHeading,
   getMetadata,
   loadBlock,
   loadCSS,

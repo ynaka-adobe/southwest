@@ -122,7 +122,7 @@ export default async function decorate(block) {
     if (!autoplay) {
       wrapper.insertAdjacentHTML(
         'beforeend',
-        '<div class="video-placeholder-play"><button type="button" title="Play"></button></div>',
+        '<div class="video-placeholder-play"><button type="button" aria-label="Play"></button></div>',
       );
       wrapper.addEventListener('click', () => {
         wrapper.remove();

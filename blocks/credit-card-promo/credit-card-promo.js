@@ -18,6 +18,8 @@
  * the headline", so paragraph count/order after that doesn't matter.
  */
 
+import { findNextHeading } from '../../scripts/aem.js';
+
 export default function decorate(block) {
   const row = block.querySelector(':scope > div');
   if (!row) return;
@@ -35,9 +37,12 @@ export default function decorate(block) {
   const [headline, ...rest] = paragraphs;
 
   if (headline) {
-    const h3 = document.createElement('h3');
-    h3.append(...headline.childNodes);
-    headline.replaceWith(h3);
+    // Heading level is computed from what precedes this block on the page
+    // (rather than hardcoded) so it can't skip or duplicate a level.
+    const heading = document.createElement(findNextHeading(block));
+    heading.className = 'credit-card-promo-title';
+    heading.append(...headline.childNodes);
+    headline.replaceWith(heading);
   }
 
   rest.forEach((p) => {

@@ -2,25 +2,10 @@ import {
   createOptimizedPicture,
   decorateIcons,
   fetchPlaceholders,
+  findNextHeading,
 } from '../../scripts/aem.js';
 
 const searchParams = new URLSearchParams(window.location.search);
-
-function findNextHeading(el) {
-  let preceedingEl = el.parentElement.previousElement || el.parentElement.parentElement;
-  let h = 'H2';
-  while (preceedingEl) {
-    const lastHeading = [...preceedingEl.querySelectorAll('h1, h2, h3, h4, h5, h6')].pop();
-    if (lastHeading) {
-      const level = parseInt(lastHeading.nodeName[1], 10);
-      h = level < 6 ? `H${level + 1}` : 'H6';
-      preceedingEl = false;
-    } else {
-      preceedingEl = preceedingEl.previousElement || preceedingEl.parentElement;
-    }
-  }
-  return h;
-}
 
 function highlightTextElements(terms, elements) {
   elements.forEach((element) => {

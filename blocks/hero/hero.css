@@ -59,7 +59,7 @@
   text-align: left;
 }
 
-.hero-content h2 {
+.hero-content .hero-title {
   margin: 0;
   font-family: var(--heading-font-family);
   font-weight: 700;
