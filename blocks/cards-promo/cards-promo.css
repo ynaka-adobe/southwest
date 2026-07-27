@@ -52,8 +52,11 @@
   color: var(--text-color);
 }
 
-/* Eyebrow / category badge: green pill with white uppercase label. */
-.cards-promo .cards-promo-eyebrow {
+/* Eyebrow / category badge: green pill with white uppercase label.
+   Selector must out-specificity `.cards-promo-card-body p` (which also
+   matches this <p>) — otherwise its dark --text-color wins over the
+   white here, dropping contrast on the green background below AA. */
+.cards-promo .cards-promo-card-body p.cards-promo-eyebrow {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 10px;
