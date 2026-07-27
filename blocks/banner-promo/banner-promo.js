@@ -10,9 +10,16 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
  *   p4: standalone CTA link ("See all deals")
  *
  * An optional first cell may contain a lifestyle image/picture; when present
- * it becomes the banner background. When absent, the CSS supplies the
- * background image.
+ * it becomes the banner background. When absent, a lazy-loaded fallback
+ * image is used instead (see FALLBACK_IMAGE_URL below).
  */
+
+// Used only when no image is authored in the block. A real <img
+// loading="lazy"> (appended below) rather than a CSS background-image, so
+// the browser can defer fetching this ~145KB asset until the block nears
+// the viewport instead of always fetching it eagerly.
+const FALLBACK_IMAGE_URL = 'https://www.southwest.com/swa-resources/images/responsive/homepage/prod_ov/dXL-gtwys-HP4-ProductOverview-bs300-IMG.webp';
+
 export default function decorate(block) {
   const rows = [...block.querySelectorAll(':scope > div')];
 
@@ -49,6 +56,13 @@ export default function decorate(block) {
       img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, widths));
     });
     block.append(imageCell);
+  } else {
+    const fallbackImg = document.createElement('img');
+    fallbackImg.className = 'banner-promo-fallback-image';
+    fallbackImg.src = FALLBACK_IMAGE_URL;
+    fallbackImg.loading = 'lazy';
+    fallbackImg.alt = '';
+    block.append(fallbackImg);
   }
 
   if (bodyCell) {

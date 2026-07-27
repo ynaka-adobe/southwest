@@ -20,11 +20,22 @@
   margin: 0 auto;
   color: var(--swa-navy);
   background-color: #cfe7ef; /* fallback while image loads */
-  background-image: url('https://www.southwest.com/swa-resources/images/responsive/homepage/prod_ov/dXL-gtwys-HP4-ProductOverview-bs300-IMG.webp');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
   border-radius: 6px;
+}
+
+/* Fallback background image (used only when no image is authored in the
+   block's first cell — see banner-promo.js). A lazy <img> instead of a CSS
+   background-image so the browser can defer fetching this ~145KB asset
+   until the block nears the viewport, same as a normal <img loading="lazy">
+   would; background-images are always fetched eagerly regardless of
+   visibility. */
+.banner-promo-fallback-image {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Body cell → flex (text column + CTA), matching source .mainLayout */

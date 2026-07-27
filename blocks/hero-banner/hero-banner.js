@@ -1,3 +1,5 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
 export default function decorate(block) {
   // hero-banner is mostly a visual promo card driven by CSS. Two variants
   // share the .hero-banner class, distinguished by context:
@@ -22,6 +24,15 @@ export default function decorate(block) {
   }
 
   if (!picture) return; // no image: keep the existing plain-card rendering
+
+  // Reprocess through our own pipeline (defaults to AEM's raw markup
+  // otherwise, at a lower compression level than we want) — sized to the
+  // image's actual max render width (1100px desktop, per hero-banner.css).
+  const img = picture.querySelector('img');
+  if (img) {
+    const widths = [{ media: '(min-width: 900px)', width: '1100' }, { width: '750' }];
+    picture = createOptimizedPicture(img.src, img.alt, false, widths);
+  }
 
   block.classList.add('hero-banner-has-image');
   block.prepend(picture);
